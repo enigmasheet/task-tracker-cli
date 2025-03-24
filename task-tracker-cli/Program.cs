@@ -3,7 +3,7 @@ using task_tracker_cli.Managers;
 using task_tracker_cli.Services;
 
 
-namespace TaskTrackerCLI
+namespace task_tracker_cli
 {
     class Program
     {

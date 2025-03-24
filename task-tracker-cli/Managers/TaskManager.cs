@@ -3,19 +3,14 @@ using Task = task_tracker_cli.Models.Task;
 
 namespace task_tracker_cli.Managers
 {
-    public class TaskManager: ITaskManager
+    public class TaskManager(IFileService fileService) : ITaskManager
     {
         private const string FilePath= "Tasks.json";
-        private readonly IFileService _fileService;
 
-        public TaskManager(IFileService fileService)
-        {
-            _fileService = fileService;
-        }
-        private List<Task> GetTasks()=> _fileService.LoadData<Task>(FilePath);
+        private List<Task> GetTasks()=> fileService.LoadData<Task>(FilePath);
         private void SaveTasks(List<Task> tasks)
         {
-            _fileService.SaveData(FilePath, tasks);
+            fileService.SaveData(FilePath, tasks);
         }
 
         private static int GenerateId(List<Task> tasks) => tasks.Count > 0 ? tasks[^1].Id + 1 : 1;
